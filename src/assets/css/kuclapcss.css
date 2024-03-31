@@ -1,0 +1,53 @@
+.StyledH1 {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: -3px;
+  margin-top: -10px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.StyledImage {
+  width: 100px;
+}
+
+.StyledH2 {
+  font-size: 18px;
+  text-align: center;
+  margin-top: 10px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.StyledH3 {
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: -10px;
+  margin-top: 5px;
+  margin-right: 560px;
+  color: gray;
+  text-decoration: underline;
+}
+
+.StyledContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.CommentFrame {
+  width: 80%;
+  max-width: 600px;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.CommentTitle {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.CommentContent {
+  font-size: 18px;
+}

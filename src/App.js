@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import coursesData from './courses.txt';
-import YourCommentFunction from './comment.js'; // Import ฟังก์ชันที่จะใช้ในการจัดการคอมเมนต์
-
-export const myFunction = () => {
-  console.log("This is my function.");
-};
+import Comment from './addandcomment.js'; // Import the Comment component
 
 const HomePage = () => {
-  const [selectedCourse, setSelectedCourse] = useState('');
+  const [selectedCourse, setSelectedCourse] = useState("");
   const [courses, setCourses] = useState([]);
-  const [numcourses, setNumCourses] = useState('');
+  const [coursesId, setCoursesId] = useState([]);
+  const [idd, setId] = useState("");
 
   useEffect(() => {
     fetchCourses();
   }, []);
 
+  useEffect(() => {
+    findIdWhenSelect(selectedCourse);
+  }, [selectedCourse]);
+
   const fetchCourses = async () => {
     try {
-      const response = await fetch(coursesData);
-      const data = await response.text();
-      const courseList = data.split('\n').filter(course => course.trim() !== '');
+      const response = await axios.get(coursesData);
+      const courseList = response.data.split('\n').filter(course => course.trim() !== '');
+      const courseIds = response.data.split('\n').map(course => course.trim().split(' ')[0]);
+      setCoursesId(courseIds);
       setCourses(courseList);
     } catch (error) {
       console.error('Error fetching courses:', error);
@@ -28,17 +31,16 @@ const HomePage = () => {
 
   const handleCourseSelect = (event) => {
     setSelectedCourse(event.target.value);
-    setNumCourses(event.target.value.substring(0, 8)); // เปลี่ยนเป็น event.target.value
-    // ทำการส่งข้อมูลไปยัง comment.js เมื่อมีการเลือกคอมเมนต์
-    YourCommentFunction(event.target.value); 
   };
 
-  
-  
+  const findIdWhenSelect = (selectedCourse) => {
+    const courseId = selectedCourse.split(' ')[0]; // Get the course ID from the selected course string
+    setId(courseId);
+  };
+
   return (
     <>
-      
-      <h1>React Page</h1>
+      <h3>React Page</h3>
       <label htmlFor="courseSelect">Select a Course:</label>
       <select id="courseSelect" onChange={handleCourseSelect} value={selectedCourse}>
         <option value="">-- Please Select --</option>
@@ -48,15 +50,10 @@ const HomePage = () => {
           </option>
         ))}
       </select>
-      {
-      numcourses && (
-        <p>You selected: {numcourses}</p>
-      )}
-        
+      <h3>you select {idd}</h3>
+      <Comment id_course={idd} />
     </>
-    
   );
-  
 };
 
 export default HomePage;
