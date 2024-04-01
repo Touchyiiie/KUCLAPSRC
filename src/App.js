@@ -72,7 +72,7 @@ const StyledSeparator = styled.div`
 `;
 
 const HomePage = () => {
-  const [selectedCourse, setSelectedCourse] = useState("");
+  const [selectedCourse, setSelectedCourse] = useState('');
   const [courses, setCourses] = useState([]);
   const [idd, setId] = useState("");
   const [subject, setsubject] = useState(1);
