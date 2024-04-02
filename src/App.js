@@ -158,7 +158,7 @@ const HomePage = () => {
 
   return (
     <>
-      
+        
         <StyledContainer>
           <StyledImage src={require('./assets/logo.png')} alt="Logo" />
           <StyledH1>KU CLAP SRC</StyledH1>
